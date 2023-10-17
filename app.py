@@ -40,7 +40,14 @@ def predict():
             Transmission_Mannual=1
         else:
             Transmission_Mannual=0
-        prediction=model.predict([[Present_Price,Kms_Driven2,Owner,Year,Fuel_Type_Diesel,Fuel_Type_Petrol,Seller_Type_Individual,Transmission_Mannual]])
+        Seats = request.form['Seats']  
+        if Seats == '4-seater':
+            Seats = 4
+        elif Seats == '6-seater':
+            Seats = 6
+        elif Seats == '8-seater':
+            Seats = 8
+        prediction=model.predict([[Present_Price,Kms_Driven2,Owner,Year,Fuel_Type_Diesel,Fuel_Type_Petrol,Seller_Type_Individual,Transmission_Mannua,Seatsl]])
         output=round(prediction[0],2)
         if output<0:
             return render_template('index2.html',prediction_texts="Sorry you cannot sell this car")
